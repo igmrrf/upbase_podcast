@@ -7,8 +7,8 @@ const adminSchema = new mongoose.Schema({
   username: {
     type: String,
     default: "",
-    min: 5,
-    max: 50,
+    minlength: 5,
+    maxlength: 50,
     required: true,
     trim: true,
     lowercase: true
@@ -17,8 +17,8 @@ const adminSchema = new mongoose.Schema({
   email: {
     type: String,
     default: "",
-    min: 10,
-    max: 100,
+    minlength: 10,
+    maxlength: 100,
     required: true,
     trim: true,
     lowercase: true,
@@ -27,8 +27,8 @@ const adminSchema = new mongoose.Schema({
   password: {
     type: String,
     default: "",
-    min: 8,
-    max: 1024,
+    minlength: 8,
+    maxlength: 1024,
     required: true
   },
   isAdmin: {

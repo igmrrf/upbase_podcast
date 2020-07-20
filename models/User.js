@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     default: "",
-    min: 5,
-    max: 50,
+    minlength: 5,
+    maxlength: 50,
     required: true,
     trim: true,
     lowercase: true
@@ -16,25 +16,25 @@ const userSchema = new mongoose.Schema({
   middleName: {
     type: String,
     default: "",
-    min: 5,
-    max: 50,
+    minlength: 5,
+    maxlength: 50,
     trim: true,
     lowercase: true
   },
   lastName: {
     type: String,
     default: "",
-    min: 5,
-    max: 50,
+    minlength: 5,
+    maxlength: 50,
     trim: true,
     lowercase: true,
-    require:true
+    require: true
   },
   email: {
     type: String,
     default: "",
-    min: 10,
-    max: 100,
+    minlength: 10,
+    maxlength: 100,
     required: true,
     trim: true,
     lowercase: true,
@@ -42,16 +42,16 @@ const userSchema = new mongoose.Schema({
   },
   mobile: {
     type: Number,
-    min: 8,
-    max: 20,
+    minlength: 8,
+    maxlength: 20,
     trim: true,
     unique: true
   },
   password: {
     type: String,
     default: "",
-    min: 8,
-    max: 1024,
+    minlength: 8,
+    maxlength: 1024,
     required: true
   }
 });
@@ -68,10 +68,10 @@ const User = mongoose.model("User", userSchema);
 const validate = user => {
   const schema = joi.object({
     firstName: joi.string().min(5).max(50).required(),
-    middlerName: joi.string().min(5).max(50),
+    middleName: joi.string().min(3).max(30).required(),
     lastName: joi.string().min(5).max(50).required(),
     email: joi.string().min(10).max(100).required().email(),
-    mobile: joi.number().min(8).max(20).required().email(),
+    mobile: joi.number().required(),
     password: joi.string().min(8).max(1024).required()
   });
   return schema.validate(user);

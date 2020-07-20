@@ -166,10 +166,13 @@ Data:
 Response:
 
 ```shell
+headers{
+    "x-upbase-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE1ZTM0YzdjODA5Mjc2MDVlMzE1OTAiLCJlbWFpbCI6ImJha2loYW5tYUBpZ21ycmYuY29tIiwiaWF0IjoxNTk1MjY5OTY1fQ.XkQcWEpMo2wrOdZ-iEaJsXesTCs-WlsTsw5Pi2eZxzs"
+}
 {
-    "_id":"9090582405982049582475258" //id of user
+    "_id":"5f15e34c7c80927605e31590" //id of user
 
-    "email":"hello@igmrrf.com",
+    "email":"hello@igmrrf.com", //email of user
 
 }
 
@@ -196,6 +199,9 @@ Data
 ### Response:
 
 ```shell
+headers{
+    "x-upbase-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE1ZTQ3NWQxYTNmMzc3NTIzNjIzNDYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1OTUyNzAyNjF9.6ClQrcFXuMONEKAysPZDqOr5PuANQWlOlTwFqqPZgss"
+}
 {
     "id":"9090582405982049582475258", //id of admin
 
@@ -264,7 +270,7 @@ Data
     {
         "title":"Hello World",//required min 5 && max 60
 
-        "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why", //required min 10 && max 100
+        "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why", //required min 100 && max 1000
 
         "tags":["basic","developer","helloworld"], //required an array min 1 and max 4
 
@@ -412,7 +418,7 @@ Data
 
 ```shell
 {
-    "token":"909058240598204958247525.dfaodifune0a9jd833fadf03e.fedafadfadfa3faeaeaee", //id of admin
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE1ZTQ3NWQxYTNmMzc3NTIzNjIzNDYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1OTUyNzA4MzB9.IiyXheACG9QRVVKsrRtoS60hdb9FHP9pIWvHHp-GzdM", //id of admin
 }
 ```
 

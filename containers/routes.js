@@ -15,9 +15,9 @@ module.exports = function (app) {
   app.use(cors());
   app.use(express.static("public"));
   app.use("/", Index);
-  app.use("/api/podcasts", Podcast);
+  app.use("/api/podcast", Podcast);
   app.use("/api/admin", Admin);
-  app.use("/api/users", User);
+  app.use("/api/user", User);
   app.use("/api/auth/admin", Auth_Admin);
   app.use("/api/auth/user", Auth_User);
   app.use(error);

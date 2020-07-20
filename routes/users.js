@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/User");
+const _ = require("lodash");
 
 router.post("/", async (req, res) => {
   const { firstName, middleName, lastName, email, mobile, password } = req.body;

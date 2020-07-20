@@ -18,8 +18,8 @@ const podcastSchema = new mongoose.Schema({
     required: true
   },
   tag: {
-    type: Array,
-    default: []
+    type: String,
+    default: ""
   },
   file: {
     type: String,
@@ -27,18 +27,19 @@ const podcastSchema = new mongoose.Schema({
   },
   dateUploaded: {
     type: Date,
-    default: ""
+    default: new Date().toDateString()
   }
 });
 
 const Podcast = mongoose.model("Podcast", podcastSchema);
 
-const validate = data => {
+const validate = podcast => {
   const schema = joi.object({
     title: joi.string().min(5).max(255).required(),
     description: joi.string().min(100).max(1000).required(),
-    tag: joi.array().required().max(5)
+    tag: joi.string().required().max(255).min(3)
   });
+  return schema.validate(podcast);
 };
 
 module.exports = {

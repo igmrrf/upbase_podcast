@@ -4,35 +4,29 @@ const path = require("path");
 const storageEngine = multer.diskStorage({
   destination: "./public/podcasts",
   filename: function (req, file, fn) {
-    fn(
-      null,
-      new Date().getTime().toString() +
-        "-" +
-        file.filename +
-        path.extname(file.originalname)
-    );
+    fn(null, file.fieldname + "-" + new Date.now());
   }
 });
 
-const validate = function (file, cb) {
-  allowedFileTyes = /mp3|aac|m4a/;
-  const extension = allowedFileTyes.test(
+const upload = multer({
+  storage: storageEngine,
+  limits: { fileSize: 200000 },
+  fileFilter: function (req, file, callback) {
+    validateFile(file, callback);
+  }
+}).single("podcast");
+
+const validateFile = function (file, call) {
+  allowedFileTypes = /mp3|aac|m4a/;
+  const extension = allowedFileTypes.test(
     path.extname(file.originalname).toLowerCase()
   );
-  const mimeType = allowedFileTyes.test(file.mimetype);
+  const mimeType = allowedFileTypes.test(file.mimetype);
   if (extension && mimeType) {
-    return cb(null, true);
+    return call(null, true);
   } else {
-    cb("invalid file  type. Only MP3, AAC and M4A files types are allowed");
+    call("Invalid file type. Only MP3, AAC and M4A file are allowed.");
   }
 };
 
-const Upload = multer({
-  storage: storageEngine,
-  limits: {
-    fileSize: 500000
-  },
-  fileFilter: function (req, file, callback) {
-    validate(file, callback);
-  }
-}).single("podcast");
+module.exports = upload;
