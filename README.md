@@ -1,57 +1,55 @@
 # Upbase Limited Backend Developer Test
 
-## Constituents
+## INFORMATION
+
+### Codebase
 
 1. JavaScript(Language)
-2. Node Js(Platform)
+2. Node Js(Environment)
 3. MongoDB(Database)
 
-## Project Structure
+### Project Structure
 
     |-config
-        config.js
         custom-environment-variable.json
         default.json
         development.json
         production.json
-    |-database
-        index.js
-    |-middleware
-        auth.js
+    |-containers
+        config.js
+        database.js
         logger.js
+        routes.js
+        upload.js
+    |-middleware
+        admin.js
+        auth.js
+        error.js
     |-models
-        Customer.js
-        Genre.js
-        Movie.js
-        Rental.js
+        Admin.js
+        Podcast.js
         User.js
     |-public
-        readme.md
-        readme.txt
+        |-podcast
+
+        robots.txt
     |-routes
-        auth.js
-        customer.js
-        genre.js
+        admin.js
+        adminAuth.js
         index.js
-        movie.js
-        rental.js
-        user.js
-    |-src
-        index.js
+        podcast.js
+        userAuth.js
+        users.js
     |-views
-        auths.pug
-        customers.pug
-        genres.pug
         index.pug
-        movies.pug
-        rentals.pug
-        users.pug
+        layout.pug
+    index.js
     .gitignore
     package.json
     package-lock.json
     README.md
 
-## Dependencies
+### Dependencies
 
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
@@ -65,30 +63,39 @@
     "lodash": "^4.17.19",
     "mongoose": "^5.9.25",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
     "winston": "^3.3.3",
-    "winston-mongodb": "^5.0.1"
 
-Run the following in your terminal to install all the dependencies
+## RUNNING THE APPLICATION
+
+Open your terminal in your folder root directory
+
+or
+
+Navigate to your project root directory from your terminal
+
+To install all dependencies at once,
+Run
 
 ```shell
 npm install
 ```
 
-But if you wish to install them yourself, make sure to add the version e.g
+Note: If you wish to installed the dependencies by yourself, make sure to add the version to avoid minor update breaking the code. e.g
 
 ```shell
 npm install lodash@4.17.19
 ```
 
-# Starting the Server
+### STARTING THE APPLICATION
 
-Run the following to start,
+Run (using Node)
 
 ```shell
 npm start
 ```
 
-Run this to start the server with all development features
+Run (using Nodemon)
 
 ```shell
 npm run start:dev
@@ -96,18 +103,236 @@ npm run start:dev
 
 ## Endpoints
 
-1. http://localhost:5000/api/user/
-2. http://localhost:5000/api/admin/
-3. http://localhost:5000/api/podcast/
-4. http://localhost:5000/api/auth/user/
-5. http://localhost:5000/api/auth/admin/
+1. http://localhost:5000/
+2. http://localhost:5000/api/user/
+3. http://localhost:5000/api/admin/
+4. http://localhost:5000/api/podcast/
+5. http://localhost:5000/api/auth/user/
+6. http://localhost:5000/api/auth/admin/
 
-### 1. User [Sign Up](http://localhost:5000/api/user) Route
+## 1. [Landing](http://localhost:5000/api/user) Route
 
-### 1. Admin [Sign Up](http://localhost:5000/api/user) Route
+### Request Available
 
-### 1. Podcast [Queries](http://localhost:5000/api/user) Route
+     GET
 
-### 1. User [Sign In](http://localhost:5000/api/user) Route
+### Response: a simple landing page form to try out the Podcast Uploads.
 
-### 1. Admin [Sign Ip](http://localhost:5000/api/user) Route
+## 2. User [Sign Up](http://localhost:5000/api/user) Route
+
+### Request Available
+
+     POST
+
+Data:
+
+```shell
+    {
+        "firstName":"Lazy",//required min 5 && max 60
+
+        "middleName":"Dev", //min 5 && max 60
+
+        "lastName":"Otaku",  //required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "mobile":"081370454", //min 8 && max 8
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+Response:
+
+```shell
+{
+    "id":"9090582405982049582475258"
+}
+
+```
+
+## 3. Admin [Sign Up](http://localhost:5000/api/user) Route
+
+### Request Available
+
+     POST
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```
+
+## 4. Podcast [Queries](http://localhost:5000/api/user) Route
+
+### Request Available
+
+    i. GET
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+    {
+        "id":"9090582405982049582475258", //id of admin
+
+        "isAdmin":true //the current status of the admin user
+    }
+```
+
+    ii. POST
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```
+
+    iii. PUT
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```
+
+    iv. DELETE
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```
+
+### Response: a simple landing page form to try out the Podcast Uploads.
+
+## 5. User [Sign In](http://localhost:5000/api/user) Route
+
+### Request Available
+
+     POST
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```
+
+## 6. Admin [Sign Ip](http://localhost:5000/api/user) Route
+
+### Request Available
+
+     POST
+
+Data
+
+```shell
+    {
+        "username":"Lazy",//required min 5 && max 60
+
+        "email":"hello@igmrrf.com", //required min 10 && max 100
+
+        "password":"igmrrf" //required min 8 && max 1024
+    }
+```
+
+### Response:
+
+```shell
+{
+    "id":"9090582405982049582475258", //id of admin
+
+    "isAdmin":true //the current status of the admin user
+}
+```

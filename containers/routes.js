@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const Podcast = require("../routes/podcast");
+const Index = require("../routes");
 const Admin = require("../routes/admin");
 const User = require("../routes/users");
 const Auth_User = require("../routes/user_auth");
@@ -18,6 +19,6 @@ module.exports = function (app) {
   app.use("/api/admin", Admin);
   app.use("/api/users", User);
   app.use("/api/auth/admin", Auth_Admin);
-  app.use("/api/auth/user", Auth_Admin);
+  app.use("/api/auth/user", Auth_User);
   app.use(error);
 };
