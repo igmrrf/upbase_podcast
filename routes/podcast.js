@@ -2,7 +2,7 @@ const express = require("express");
 const Auth = require("../middleware/auth");
 const Admin = require("../middleware/admin");
 const router = express.Router();
-const { Podcast, validate } = require("../models/podcast");
+const { Podcast, validate } = require("../models/Podcast");
 const Upload = require("../containers/upload");
 
 router.get("/", [Auth, Admin], async (req, res) => {

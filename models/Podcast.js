@@ -27,7 +27,7 @@ const podcastSchema = new mongoose.Schema({
   },
   dateUploaded: {
     type: Date,
-    default: new Date.now()
+    default: ""
   }
 });
 

@@ -17,7 +17,7 @@ const adminSchema = new mongoose.Schema({
   email: {
     type: String,
     default: "",
-    min: 5,
+    min: 10,
     max: 100,
     required: true,
     trim: true,
@@ -27,7 +27,7 @@ const adminSchema = new mongoose.Schema({
   password: {
     type: String,
     default: "",
-    min: 5,
+    min: 8,
     max: 1024,
     required: true
   },
@@ -50,7 +50,7 @@ const validate = admin => {
   const schema = joi.object({
     username: joi.string().min(5).max(60).required(),
     email: joi.string().min(5).max(100).required().email(),
-    password: joi.string().min(5).max(255).required()
+    password: joi.string().min(8).max(1024).required()
   });
   return schema.validate(admin);
 };
