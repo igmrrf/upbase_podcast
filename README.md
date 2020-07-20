@@ -40,10 +40,6 @@
         podcast.js
         userAuth.js
         users.js
-    |-views
-        index.pug
-        layout.pug
-    index.js
     .gitignore
     package.json
     package-lock.json
@@ -88,7 +84,7 @@ Note: _code_ is a command that comes with [VsCode](https://code.visualstudio.com
 Then configure the file as follows
 
 ```shell
-    PORT=port_to_run_server
+    PORT=5000
     UPBASE_PASSWORD=random_password
     UPBASE_USERNAME=random_username
     UPBASE_DATABASE=mongodb_url
@@ -421,7 +417,5 @@ Data
     "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjE1ZTQ3NWQxYTNmMzc3NTIzNjIzNDYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1OTUyNzA4MzB9.IiyXheACG9QRVVKsrRtoS60hdb9FHP9pIWvHHp-GzdM", //id of admin
 }
 ```
-
-## A working copy of the application can be found at: [Upbase_Podcast](https://upbase_podcast.herokuapp.com)
 
 # [Upbase_Test](https://github.com/igmrrf).
