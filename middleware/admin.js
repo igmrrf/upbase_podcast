@@ -1,5 +1,4 @@
-const winston = require("winston");
-
-module.exports = function () {
-  winston.info("This is the admin middleware setup");
+module.exports = function (req, res, next) {
+  if (!req.user.isAdmin) return res.status(403).send("Access Denied");
+  next();
 };

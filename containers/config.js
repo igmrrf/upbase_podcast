@@ -9,8 +9,8 @@ module.exports = function (app) {
   }
 
   if (app.get("env") === "development") {
-    winston("Username: " + config.get("username"));
-    winston("Password: " + config.get("password"));
+    winston.info("Username: " + config.get("username"));
+    winston.info("Password: " + config.get("password"));
     app.use(morgan("tiny"));
     winston.info("Morgan Enabled");
   }
