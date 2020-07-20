@@ -28,7 +28,7 @@ router.post("/", Auth, async (req, res) => {
       .status(400)
       .send({ success: false, message: error.details[0].message });
   let podcast = await Podcast.find({ title });
-  console.log(await podcast);
+
   if (podcast.length > 0)
     return res.status(400).send("Please choose another title for your podcast");
   Upload(req, res, error => {
