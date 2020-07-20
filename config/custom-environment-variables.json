@@ -1,5 +1,6 @@
 {
-  "port": "PORT",
-  "password": "",
-  "username": "igmrrf"
+  "port": "UPBASE_PORT",
+  "password": "UPBASE_PASSWORD",
+  "username": "UPBASE_USERNAME",
+  "url": "UPBASE_DATABASE"
 }
