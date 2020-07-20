@@ -33,11 +33,11 @@ const adminSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: false
+    default: true
   }
 });
 
-userSchema.methods.generateAuthToken = function () {
+adminSchema.methods.generateAuthToken = function () {
   return jwt.sign(
     { _id: this._id, isAdmin: this.isAdmin },
     config.get("jwt_secret_key")

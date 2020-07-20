@@ -22,7 +22,7 @@ const podcastSchema = new mongoose.Schema({
     default: []
   },
   file: {
-    type: File,
+    type: String,
     required: true
   },
   dateUploaded: {

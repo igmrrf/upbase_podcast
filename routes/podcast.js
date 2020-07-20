@@ -3,8 +3,9 @@ const Auth = require("../middleware/auth");
 const Admin = require("../middleware/admin");
 const router = express.Router();
 const { Podcast, validate } = require("../models/podcast");
+const Upload = require("../containers/upload");
 
-router.get("/", async (req, res) => {
+router.get("/", [Auth, Admin], async (req, res) => {
   const podcast = await Podcast.find().sort("name");
   res.send(podcast);
 });
@@ -19,24 +20,35 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", Auth, async (req, res) => {
-  const { error } = validate(req.body);
+  const { title, description, tag } = req.body;
+  const { error } = validate({ title, description, tag });
   if (error)
     return res
       .status(400)
       .send({ success: false, message: error.details[0].message });
-  let podcast = await Podcast.find({ title, file });
+  let podcast = await Podcast.find({ title });
+  if (podcast)
+    return res.status(400).send("Please choose another title for your podcast");
+  Upload(req, res, err => {
+    if (err) return res.status(500).send("File could not be uploaded");
+    if (req.file === undefined)
+      return res.status(401).send("Please select a Podcast and try again");
+    const fullPath = "podcasts/" + req.file.fieldname;
 
-  podcast = new podcast({
-    title,
-    description,
-    tag,
-    file
+    podcast = new Podcast({
+      file: fullPath,
+      title,
+      description,
+      tag
+    });
+    podcast.save(ex => {
+      if (ex) throw Error("Couldn't save Podcast");
+      res.send(podcast_id);
+    });
   });
-  await podcast.save();
-  res.send(podcast);
 });
 
-router.put("/:id", Auth, async (req, res) => {
+router.put("/:id", [Auth, Admin], async (req, res) => {
   const { error } = validate(req.body);
   if (error)
     return res
