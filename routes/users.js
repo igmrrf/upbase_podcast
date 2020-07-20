@@ -21,10 +21,7 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   token = user.generateAuthToken();
-  res
-    .header("x-upbase-auth-token", token)
-    .send(_.pick(user, ["id", "name", "email"]));
-  res.send(user);
+  res.header("x-upbase-auth-token", token).send(_.pick(user, ["_id", "email"]));
 });
 
 module.exports = router;

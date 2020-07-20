@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
   token = admin.generateAuthToken();
   res
     .header("x-upbase-auth-token", token)
-    .send(_.pick(admin, ["id", "isAdmin"]));
+    .send(_.pick(admin, ["_id", "isAdmin"]));
 });
 
 module.exports = router;

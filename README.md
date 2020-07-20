@@ -74,6 +74,29 @@ or
 
 Navigate to your project root directory from your terminal
 
+### SETTING UP ENVIRONMENTAL VARIABLES
+
+Run
+
+```shell
+    $ touch .env
+    $ code .env
+```
+
+Note: _code_ is a command that comes with [VsCode](https://code.visualstudio.com/). Only run it if you have VsCode install and configured correctly on your machine
+
+Then configure the file as follows
+
+```shell
+    PORT=port_to_run_server
+    UPBASE_PASSWORD=random_password
+    UPBASE_USERNAME=random_username
+    UPBASE_DATABASE=mongodb_url
+    UPBASE_JWT_SCECRET_KEY=json-web_token_secret_key
+```
+
+### STARTING THE APPLICATION
+
 To install all dependencies at once,
 Run
 
@@ -87,8 +110,6 @@ Note: If you wish to installed the dependencies by yourself, make sure to add th
 npm install lodash@4.17.19
 ```
 
-### STARTING THE APPLICATION
-
 Run (using Node)
 
 ```shell
@@ -101,7 +122,7 @@ Run (using Nodemon)
 npm run start:dev
 ```
 
-## Endpoints
+## ENDPOINTS
 
 1. http://localhost:5000/
 2. http://localhost:5000/api/user/
@@ -110,9 +131,9 @@ npm run start:dev
 5. http://localhost:5000/api/auth/user/
 6. http://localhost:5000/api/auth/admin/
 
-## 1. [Landing](http://localhost:5000/api/user) Route
+## 1. [Landing](http://localhost:5000/) Route
 
-### Request Available
+### CRUD OPTIONS AVAILABLE
 
      GET
 
@@ -120,7 +141,7 @@ npm run start:dev
 
 ## 2. User [Sign Up](http://localhost:5000/api/user) Route
 
-### Request Available
+### CRUD OPTIONS AVAILABLE
 
      POST
 
@@ -138,7 +159,7 @@ Data:
 
         "mobile":"081370454", //min 8 && max 8
 
-        "password":"igmrrf" //required min 8 && max 1024
+        "password":"tldo1234" //required min 8 && max 1024
     }
 ```
 
@@ -146,14 +167,17 @@ Response:
 
 ```shell
 {
-    "id":"9090582405982049582475258"
+    "_id":"9090582405982049582475258" //id of user
+
+    "email":"hello@igmrrf.com",
+
 }
 
 ```
 
-## 3. Admin [Sign Up](http://localhost:5000/api/user) Route
+## 3. Admin [Sign Up](http://localhost:5000/api/admin) Route
 
-### Request Available
+### CRUD OPTIONS AVAILABLE
 
      POST
 
@@ -161,11 +185,11 @@ Data
 
 ```shell
     {
-        "username":"Lazy",//required min 5 && max 60
+        "username":"lazydev",//required min 5 && max 60
 
         "email":"hello@igmrrf.com", //required min 10 && max 100
 
-        "password":"igmrrf" //required min 8 && max 1024
+        "password":"tldo1234" //required min 8 && max 1024
     }
 ```
 
@@ -175,97 +199,188 @@ Data
 {
     "id":"9090582405982049582475258", //id of admin
 
-    "isAdmin":true //the current status of the admin user
+    "isAdmin":true //the current status of the admin
 }
 ```
 
-## 4. Podcast [Queries](http://localhost:5000/api/user) Route
+## 4. Podcast [Queries](http://localhost:5000/api/podcast) Route
 
-### Request Available
+### CRUD OPTIONS AVAILABLE
+
+```shell
+1. GET
+2. POST
+3. PUT
+4. DELETE
+```
 
     i. GET
+
+url: http://localhost:5050/api/podcasts/ (Admin Only)
 
 Data
 
 ```shell
-    {
-        "username":"Lazy",//required min 5 && max 60
-
-        "email":"hello@igmrrf.com", //required min 10 && max 100
-
-        "password":"igmrrf" //required min 8 && max 1024
-    }
+    //No Data Needed
 ```
 
 ### Response:
 
 ```shell
-    {
-        "id":"9090582405982049582475258", //id of admin
+   [
+        {
+            "title":"Crud Operations",
 
-        "isAdmin":true //the current status of the admin user
-    }
+            "description":"CRUD operations are the basics of backend development. As basically every other operations will be based on your understanding of this.",
+
+            "tags":["crud","server","node"],
+
+            "file": "public/podcasts/12334484fffffff393933fdfddfdg.mp3",
+
+            "dateUploaded": "21 July 2020"
+        },
+        {
+            "title":"Hello World",
+
+            "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why",
+
+            "tags":["basic","developer","helloworld"],
+
+            "file": "public/podcasts/1233448484939393933fdfddfdg.mp3",
+
+            "dateUploaded": "22 July 2020"
+        }
+        ......
+   ]
 ```
 
     ii. POST
 
+url: http://localhost:5050/api/podcasts/ (Admin && User)
+
 Data
 
 ```shell
     {
-        "username":"Lazy",//required min 5 && max 60
+        "title":"Hello World",//required min 5 && max 60
 
-        "email":"hello@igmrrf.com", //required min 10 && max 100
+        "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why", //required min 10 && max 100
 
-        "password":"igmrrf" //required min 8 && max 1024
+        "tags":["basic","developer","helloworld"], //required an array min 1 and max 4
+
+        "file": podcast.mp3,
+
     }
 ```
 
 ### Response:
 
 ```shell
-{
-    "id":"9090582405982049582475258", //id of admin
+    {
+         "id":"3fkdflkjdfdfdfahdfjhadfd8fadf09adf90",
 
-    "isAdmin":true //the current status of the admin user
-}
+        "title":"Hello World",
+
+        "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why",
+
+        "tags":["basic","developer","helloworld"],
+
+        "file": "public/podcasts/1233448484939393933fdfddfdg.mp3",
+
+        "dateUploaded": "22 July 2020"
+    }
 ```
 
     iii. PUT
 
+url: http://localhost:5050/api/podcasts/:id (Admin Only)
+
 Data
 
 ```shell
-    {
-        "username":"Lazy",//required min 5 && max 60
+    Params {
 
-        "email":"hello@igmrrf.com", //required min 10 && max 100
+        "id":"3fkdflkjdfdfdfahdfjhadfd8fadf09adf90" //id of podcast
 
-        "password":"igmrrf" //required min 8 && max 1024
+    },
+
+    //Body Options are based on the Changes made.
+
+    body:{
+        "title":"lazydev",//required min 5 && max 60
+
+        "description":"Hello world is the first thing you'll print or possibly learn in any programming langaue and surely you'll understand why", //required min 100 && max 1000
+
+        "tags":["newbie","programmer","coder"] //required an array min 1 and max 4
+
+        "file": podcast.mp3,
+
     }
 ```
 
 ### Response:
 
 ```shell
-{
-    "id":"9090582405982049582475258", //id of admin
+    {
+        "_id":"3fkdflkjdfdfdfahdfjhadfd8fadf09adf90",
 
-    "isAdmin":true //the current status of the admin user
-}
+        "title":"lazydev",//required min 5 && max 60
+
+        "description":"hello@igmrrf.com", //required min 10 && max 100
+
+        "tags":["crud","podcast","love"] //required an array min 1 and max 4
+
+        "file": "public/podcasts/1233448484939393933fdfddfdg.mp3",
+
+        "dateUploaded": "22 July 2020"
+    }
 ```
 
     iv. DELETE
 
+url: http://localhost:5050/api/podcasts/:id (Admin Only)
+
+Data
+
+```shell
+  Params {
+
+        "id":"3fkdflkjdfdfdfahdfjhadfd8fadf09adf90"
+
+    }
+```
+
+### Response:
+
+```shell
+    {
+        "_id":"3fkdflkjdfdfdfahdfjhadfd8fadf09adf90",
+
+        "title":"lazydev",//required min 5 && max 60
+
+        "description":"hello@igmrrf.com", //required min 10 && max 100
+
+        "tags":["crud","podcast","love"] //required an array min 1 and max 4
+
+        "file": "public/podcasts/1233448484939393933fdfddfdg.mp3",
+
+        "dateUploaded": "22 July 2020"
+    }
+```
+
+## 5. User [Sign In](http://localhost:5000/api/auth/user) Route
+
+### Request Available:
+
+     POST
+
 Data
 
 ```shell
     {
-        "username":"Lazy",//required min 5 && max 60
-
         "email":"hello@igmrrf.com", //required min 10 && max 100
 
-        "password":"igmrrf" //required min 8 && max 1024
+        "password":"tldo1234",//required min 8 && max 1024
     }
 ```
 
@@ -273,15 +388,11 @@ Data
 
 ```shell
 {
-    "id":"9090582405982049582475258", //id of admin
-
-    "isAdmin":true //the current status of the admin user
+    "token":"909058240598204958247525.dfaodifune0a9jd833fadf03e.fedafadfadfa3faeaeaee", //id of admin
 }
 ```
 
-### Response: a simple landing page form to try out the Podcast Uploads.
-
-## 5. User [Sign In](http://localhost:5000/api/user) Route
+## 6. Admin [Sign Up](http://localhost:5000/api/auth/admin) Route
 
 ### Request Available
 
@@ -291,11 +402,9 @@ Data
 
 ```shell
     {
-        "username":"Lazy",//required min 5 && max 60
+        "username":"lazydev",//required min 5 && max 60
 
-        "email":"hello@igmrrf.com", //required min 10 && max 100
-
-        "password":"igmrrf" //required min 8 && max 1024
+        "password":"tldo1234" //required min 8 && max 1024
     }
 ```
 
@@ -303,36 +412,10 @@ Data
 
 ```shell
 {
-    "id":"9090582405982049582475258", //id of admin
-
-    "isAdmin":true //the current status of the admin user
+    "token":"909058240598204958247525.dfaodifune0a9jd833fadf03e.fedafadfadfa3faeaeaee", //id of admin
 }
 ```
 
-## 6. Admin [Sign Ip](http://localhost:5000/api/user) Route
+## A working copy of the application can be found at: [Upbase_Podcast](https://upbase_podcast.herokuapp.com)
 
-### Request Available
-
-     POST
-
-Data
-
-```shell
-    {
-        "username":"Lazy",//required min 5 && max 60
-
-        "email":"hello@igmrrf.com", //required min 10 && max 100
-
-        "password":"igmrrf" //required min 8 && max 1024
-    }
-```
-
-### Response:
-
-```shell
-{
-    "id":"9090582405982049582475258", //id of admin
-
-    "isAdmin":true //the current status of the admin user
-}
-```
+# [Upbase_Test](https://github.com/igmrrf).
