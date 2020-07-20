@@ -2,5 +2,6 @@
   "port": "UPBASE_PORT",
   "password": "UPBASE_PASSWORD",
   "username": "UPBASE_USERNAME",
-  "url": "UPBASE_DATABASE"
+  "url": "UPBASE_DATABASE",
+  "jwt_secret_key": "UPBASE_JWT_SECRET_KEY"
 }

@@ -4,7 +4,8 @@ const cors = require("cors");
 const Podcast = require("../routes/podcast");
 const Admin = require("../routes/admin");
 const User = require("../routes/users");
-const Auth = require("../routes/auth");
+const Auth_User = require("../routes/user_auth");
+const Auth_Admin = require("../routes/admin_auth");
 const error = require("../middleware/error");
 
 module.exports = function (app) {
@@ -16,6 +17,7 @@ module.exports = function (app) {
   app.use("/api/podcasts", Podcast);
   app.use("/api/admin", Admin);
   app.use("/api/users", User);
-  app.use("/api/auth", Auth);
+  app.use("/api/auth/admin", Auth_Admin);
+  app.use("/api/auth/user", Auth_Admin);
   app.use(error);
 };
