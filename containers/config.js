@@ -4,7 +4,7 @@ const morgan = require("morgan");
 
 module.exports = function (app) {
   // * CHECKING FOR WORKING ENVIRONMENTAL VARIABLES
-  if (!config.get("password")) {
+  if (!config.get("username")) {
     throw new Error("FATAL ERROR: missing environmental variable 'PASSWORD' ");
   }
 
